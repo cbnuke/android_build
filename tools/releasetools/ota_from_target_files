@@ -507,7 +507,14 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
 
   device_specific.FullOTA_InstallBegin()
 
+  script.Print("");
+  script.Print("Brought to you by:");
+  script.Print("NovaFusion");
+  script.Print("www.NovaFusion.pl");
+  script.Print("");
+
   if OPTIONS.backuptool:
+    script.Print("Creating backup...."");
     script.Mount("/system")
     script.RunBackup("backup")
     script.Unmount("/system")
@@ -515,18 +522,24 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
   script.ShowProgress(0.5, 0)
 
   if OPTIONS.wipe_user_data:
+    script.Print("Wiping user data....");
     script.FormatPartition("/data")
 
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
+  script.Print("Formatting /system...."");
   script.FormatPartition("/system")
+  script.Print("Mounting /system....");
   script.Mount("/system")
   if not OPTIONS.no_separate_recovery:
+    script.Print("Unpacking recovery....");
     script.UnpackPackageDir("recovery", "/system")
+  script.Print("Installing ROM on /system....");
   script.UnpackPackageDir("system", "/system")
 
   symlinks = CopySystemFiles(input_zip, output_zip)
+  script.Print("Creating needed symlinks....");
   script.MakeSymlinks(symlinks)
 
   boot_img = common.GetBootableImage("boot.img", "boot.img",
@@ -534,6 +547,7 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
   if not OPTIONS.no_separate_recovery:
     MakeRecoveryPatch(OPTIONS.input_tmp, output_zip, recovery_img, boot_img)
 
+  script.Print("Setting permisions....");
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
@@ -543,9 +557,11 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
 
   if OPTIONS.backuptool:
     script.ShowProgress(0.2, 10)
+    script.Print("Restoring backup....");
     script.RunBackup("restore")
 
   script.ShowProgress(0.2, 10)
+  script.Print("Flashing kernel....");
   script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.1, 0)
@@ -555,6 +571,13 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
     script.AppendExtra(OPTIONS.extra_script)
 
   script.UnmountAll()
+
+  script.Print("Done!");
+  script.Print("");
+  script.Print("Brought to you by:");
+  script.Print("NovaFusion");
+  script.Print("www.NovaFusion.pl");
+  script.Print("");
 
   if OPTIONS.two_step:
     script.AppendExtra("""
