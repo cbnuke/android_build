@@ -507,12 +507,6 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
 
   device_specific.FullOTA_InstallBegin()
 
-  script.Print("");
-  script.Print("Brought to you by:");
-  script.Print("NovaFusion");
-  script.Print("www.NovaFusion.pl");
-  script.Print("");
-
   if OPTIONS.backuptool:
     script.Print("Creating backup...."");
     script.Mount("/system")
@@ -571,13 +565,6 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
     script.AppendExtra(OPTIONS.extra_script)
 
   script.UnmountAll()
-
-  script.Print("Done!");
-  script.Print("");
-  script.Print("Brought to you by:");
-  script.Print("NovaFusion");
-  script.Print("www.NovaFusion.pl");
-  script.Print("");
 
   if OPTIONS.two_step:
     script.AppendExtra("""
