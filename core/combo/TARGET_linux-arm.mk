@@ -151,7 +151,7 @@ TARGET_GLOBAL_LDFLAGS += \
 
 TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
-TARGET_GLOBAL_CPPFLAGS += -O2 -fvisibility-inlines-hidden -Wno-error=unused-parameter
+TARGET_GLOBAL_CPPFLAGS += -O2 -fvisibility-inlines-hidden
 
 # More flags/options can be added here
 TARGET_RELEASE_CFLAGS := \
