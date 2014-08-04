@@ -35,7 +35,7 @@ TARGET_ARCH_VARIANT := armv5te
 endif
 
 ifeq ($(strip $(TARGET_GCC_VERSION_EXP)),)
-TARGET_GCC_VERSION := 4.8
+TARGET_GCC_VERSION := 4.7
 else
 TARGET_GCC_VERSION := $(TARGET_GCC_VERSION_EXP)
 endif
@@ -77,7 +77,7 @@ TARGET_arm_CFLAGS :=	-O3 \
 
 # Modules can choose to compile some source as thumb.
 TARGET_thumb_CFLAGS :=  -mthumb \
-                        -O2 \
+                        -Os \
                         -fomit-frame-pointer \
                         -fno-strict-aliasing
 
@@ -151,12 +151,11 @@ TARGET_GLOBAL_LDFLAGS += \
 
 TARGET_GLOBAL_CFLAGS += -mthumb-interwork
 
-TARGET_GLOBAL_CPPFLAGS += -O2 -fvisibility-inlines-hidden
+TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 
 # More flags/options can be added here
 TARGET_RELEASE_CFLAGS := \
-			-O2 \
-                        -DNDEBUG \
+			-DNDEBUG \
 			-g \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
