@@ -161,8 +161,7 @@ TARGET_RELEASE_CFLAGS := \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
 			-frerun-cse-after-loop \
-			-frename-registers \
-			-Wno-error=unused-parameter
+			-frename-registers
 
 libc_root := bionic/libc
 libm_root := bionic/libm
