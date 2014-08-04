@@ -156,7 +156,7 @@ TARGET_GLOBAL_CPPFLAGS += -O2 -fvisibility-inlines-hidden -Wno-error=unused-para
 # More flags/options can be added here
 TARGET_RELEASE_CFLAGS := \
 			-O2 \
-			-DNDEBUG \
+                        -DNDEBUG \
 			-g \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
